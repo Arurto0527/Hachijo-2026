@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitsuki & Aruto's Hachijojima Trip 2026</title>
+<style>
+:root{
+  --primary-green:#2d4a43;
+  --bg-white:#fcfbfa;
+  --text-dark:#2b302e;
+  --accent-peach:#ca9e8a;
+  --card-bg:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif;}
+body{background-color:#e2e8f0;display:flex;justify-content:center;align-items:center;min-height:100vh;color:var(--text-dark);transition:background-color .3s,color .3s;}
+.phone-wrapper{width:100%;max-width:390px;height:100vh;max-height:844px;background-color:var(--bg-white);display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);transition:background-color .3s;}
+@media (max-width:450px){.phone-wrapper{max-width:100%;max-height:100vh;box-shadow:none;}}
+.content-container{flex:1;overflow-y:auto;padding-bottom:80px;}
+.page{display:none;padding:20px;}
+.page.active{display:block;animation:fadeIn .3s ease-in-out;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.tab-bar{position:absolute;bottom:0;left:0;width:100%;height:65px;background-color:var(--card-bg);border-top:1px solid #e2e8f0;display:flex;justify-content:space-around;align-items:center;z-index:100;padding-bottom:5px;transition:background-color .3s;}
+.tab-btn{background:none;border:none;color:#a0aec0;font-size:11px;cursor:pointer;display:flex;flex-direction:column;align-items:center;width:20%;transition:color .2s;}
+.tab-btn.active{color:var(--primary-green);font-weight:bold;}
+.tab-icon{font-size:20px;margin-bottom:2px;}
+h1,h2,h3{color:var(--primary-green);transition:color .3s;}
+.accent-title{text-align:center;font-size:22px;margin-bottom:4px;font-weight:700;}
+.accent-sub{text-align:center;font-size:11px;color:var(--accent-peach);letter-spacing:3px;margin-bottom:15px;font-weight:bold;}
+.card{background-color:var(--card-bg);border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);border:1px solid #f1f5f9;transition:background-color .3s,border-color .3s;}
+/* 表紙カバー */
+.cover-card{background:linear-gradient(160deg,#2d4a43 0%,#3d6457 55%,#ca9e8a 130%);color:#fff;text-align:center;padding:32px 15px 28px;border:none;position:relative;overflow:hidden;}
+.cover-card::after{content:'🏝️';position:absolute;font-size:90px;opacity:.12;right:-14px;bottom:-18px;transform:rotate(-12deg);}
+.cover-card h1{color:#fff;font-size:24px;margin:10px 0;line-height:1.5;}
+.cover-card .cover-sub{font-size:13px;opacity:.85;}
+.cover-card .cover-eyebrow{color:#f3d9cb;font-weight:bold;letter-spacing:3px;font-size:11px;}
+/* 編集可能フィールド */
+.editable{border-bottom:1.5px dashed rgba(255,255,255,.6);cursor:text;min-width:44px;display:inline-block;padding:0 4px;outline:none;border-radius:4px;transition:background .2s;}
+.editable:focus{background:rgba(255,255,255,.15);}
+.care-note .editable{border-bottom-color:var(--accent-peach);color:var(--primary-green);}
+.care-note .editable:focus{background:rgba(202,158,138,.15);}
+.edit-hint{font-size:10px;opacity:.7;margin-top:8px;}
+/* プログレスバー */
+.bar{width:100%;height:10px;background:#edf2f7;border-radius:6px;overflow:hidden;margin-top:8px;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--primary-green),#5a8f7d);border-radius:6px;width:0%;transition:width .4s ease;}
+.bar-fill.warn{background:linear-gradient(90deg,#d97706,#ef4444);}
+.spot-img{width:100%;height:120px;border-radius:12px;margin:10px 0;display:flex;align-items:center;justify-content:center;font-size:52px;transition:filter .3s;}
+.g-ship{background:linear-gradient(135deg,#1e3a5f,#4a7fb5);}
+.g-mountain{background:linear-gradient(135deg,#3b6e4f,#9fd0a8);}
+.g-food{background:linear-gradient(135deg,#c25b3f,#f0b07a);}
+.g-sunset{background:linear-gradient(135deg,#e96443,#f7c46c);}
+.g-ocean{background:linear-gradient(135deg,#0f6e8c,#6fd6c8);}
+.g-bike{background:linear-gradient(135deg,#7a8f56,#cfe0a8);}
+.g-izakaya{background:linear-gradient(135deg,#5a3a2e,#c98850);}
+.g-geo{background:linear-gradient(135deg,#7a3030,#e0a050);}
+.g-green{background:linear-gradient(135deg,#2e6b3a,#a8e0b0);}
+.g-onsen{background:linear-gradient(135deg,#4a6b8a,#b0d0e8);}
+.g-stars{background:linear-gradient(135deg,#0a1535,#3a4a8a);}
+.timeline-item{position:relative;padding-left:24px;margin-bottom:20px;border-left:2px dashed #cbd5e1;transition:border-color .3s,background-color .3s;border-radius:8px;}
+.timeline-item::before{content:'';position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background-color:var(--accent-peach);transition:background-color .3s;}
+.timeline-item.now-item{background-color:#fff7ed;border-left:2px solid #f59e0b;padding-top:6px;padding-bottom:6px;}
+.timeline-item.now-item::before{background-color:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.25);animation:pulse 1.5s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,158,11,.4);}70%{box-shadow:0 0 0 8px rgba(245,158,11,0);}100%{box-shadow:0 0 0 0 rgba(245,158,11,0);}}
+.now-badge{display:inline-block;background:#f59e0b;color:#fff;font-size:10px;font-weight:bold;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;}
+.time{font-size:12px;font-weight:bold;color:var(--accent-peach);transition:color .3s;}
+.spot-name{font-size:16px;font-weight:bold;color:var(--primary-green);text-decoration:underline dotted;cursor:pointer;display:inline-block;margin:2px 0;transition:color .3s;}
+.care-note{background-color:#f0f4f1;border-left:3px solid var(--primary-green);padding:8px 12px;border-radius:0 8px 8px 0;font-size:12px;margin-top:6px;transition:background-color .3s,border-color .3s,color .3s;}
+.route-btn{display:flex;align-items:center;justify-content:center;background-color:var(--bg-white);border:1px solid var(--primary-green);color:var(--primary-green);padding:8px;border-radius:20px;font-size:13px;font-weight:bold;text-decoration:none;margin:15px 0 15px 24px;transition:all .15s;cursor:pointer;width:calc(100% - 24px);}
+.route-btn:active{background-color:var(--primary-green);color:white;transform:scale(.98);}
+.check-item{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #f1f5f9;cursor:pointer;transition:border-color .3s,color .3s;font-size:14px;}
+.check-item input{margin-right:12px;transform:scale(1.2);accent-color:var(--primary-green);flex-shrink:0;}
+.check-item.checked{text-decoration:line-through;color:#a0aec0;opacity:.7;}
+.link-category{font-size:14px;font-weight:bold;color:var(--accent-peach);margin:15px 0 8px 0;border-bottom:1px solid #e2e8f0;padding-bottom:4px;transition:color .3s,border-bottom-color .3s;}
+.quick-link{display:block;background-color:var(--card-bg);color:var(--text-dark);padding:12px;border-radius:10px;text-decoration:none;margin-bottom:8px;border:1px solid #e2e8f0;font-size:14px;font-weight:500;transition:all .15s;}
+.quick-link:active{background-color:#f8fafc;transform:scale(.98);}
+.photo-frame{border:2px dashed var(--accent-peach);border-radius:12px;height:180px;display:flex;flex-direction:column;justify-content:center;align-items:center;color:var(--accent-peach);font-size:14px;background-color:#fffaf8;margin-top:20px;}
+.countdown{display:flex;justify-content:center;gap:8px;margin-top:12px;}
+.cd-box{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:8px 0;width:62px;text-align:center;backdrop-filter:blur(2px);}
+.cd-num{font-size:20px;font-weight:bold;line-height:1.1;}
+.cd-label{font-size:10px;opacity:.8;}
+.weather-banner{border-radius:14px;padding:14px;margin-bottom:16px;font-size:13px;line-height:1.6;border:1px solid #e2e8f0;background:linear-gradient(135deg,#eef6ff,#fdfdfd);}
+.weather-banner .wb-title{font-weight:bold;font-size:14px;margin-bottom:6px;color:var(--primary-green);}
+.weather-day{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px dashed #e2e8f0;font-size:12px;}
+.weather-day:last-child{border-bottom:none;}
+.plan-suggest{margin-top:8px;padding:8px 10px;border-radius:8px;font-weight:bold;font-size:13px;text-align:center;}
+.plan-sunny{background:#fef3c7;color:#92400e;}
+.plan-rainy{background:#dbeafe;color:#1e40af;}
+.expense-log{margin-top:10px;font-size:13px;}
+.expense-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px dashed #e2e8f0;}
+.expense-del{background:none;border:none;color:#e53e3e;cursor:pointer;font-size:14px;padding:0 6px;}
+.memo-area{width:100%;min-height:70px;border:1px solid #e2e8f0;border-radius:10px;padding:10px;font-size:13px;margin-top:8px;resize:vertical;background:var(--card-bg);color:var(--text-dark);transition:background-color .3s,color .3s,border-color .3s;}
+.save-hint{font-size:10px;color:#a0aec0;text-align:right;margin-top:2px;}
+
+/* 予約控えカード装飾 */
+.res-card{background-color:#f0f7ff;border:1px solid #cfe2fe;border-left:4px solid #4a7fb5;border-radius:12px;padding:12px;margin-bottom:16px;}
+.res-card summary{font-weight:bold;color:#2b6cb0;cursor:pointer;font-size:13px;outline:none;}
+.res-detail{background:#ffffff;padding:10px;border-radius:8px;border:1px solid #e2e8f0;margin-top:6px;font-size:12px;line-height:1.6;}
+
+/* ナイトモード */
+body.night-mode{background-color:#0d0000!important;color:#ff4444!important;}
+body.night-mode .phone-wrapper{background-color:#120000!important;box-shadow:0 25px 50px -12px rgba(255,0,0,.1);}
+body.night-mode .card,body.night-mode .weather-banner{background:#1a0000!important;border-color:#440000!important;box-shadow:none!important;}
+body.night-mode .cover-card{background:#1a0000!important;}
+body.night-mode .cover-card h1,body.night-mode .cover-card .cover-sub,body.night-mode .cover-card .cover-eyebrow{color:#ff4444!important;}
+body.night-mode h1,body.night-mode h2,body.night-mode h3,body.night-mode .spot-name{color:#ff2222!important;}
+body.night-mode .accent-sub{color:#ff6666!important;}
+body.night-mode .time,body.night-mode .link-category{color:#ff6666!important;border-bottom-color:#550000!important;}
+body.night-mode .timeline-item{border-left-color:#440000!important;background:none!important;}
+body.night-mode .care-note{background-color:#250000!important;border-left-color:#ff2222!important;color:#ff8888!important;}
+body.night-mode .care-note .editable{color:#ff8888!important;border-bottom-color:#ff4444!important;}
+body.night-mode .route-btn,body.night-mode .quick-link{background-color:#220000!important;border-color:#ff2222!important;color:#ff2222!important;}
+body.night-mode .tab-bar{background-color:#1a0000!important;border-top-color:#440000!important;}
+body.night-mode .tab-btn{color:#552222!important;}
+body.night-mode .tab-btn.active{color:#ff2222!important;}
+body.night-mode .check-item{border-bottom-color:#330000!important;}
+body.night-mode .check-item.checked{color:#660000!important;}
+body.night-mode .spot-img{filter:brightness(.35) saturate(.4);}
+body.night-mode .cd-box{background:#330000!important;border-color:#550000!important;color:#ff4444!important;}
+body.night-mode .memo-area{background:#1a0000!important;color:#ff8888!important;border-color:#440000!important;}
+body.night-mode .plan-sunny,body.night-mode .plan-rainy{background:#250000!important;color:#ff6666!important;}
+body.night-mode .bar{background:#250000!important;}
+body.night-mode .bar-fill{background:#661111!important;}
+body.night-mode .res-card{background-color:#1a0808!important;border-color:#4a1111!important;border-left-color:#ff3333!important;}
+body.night-mode .res-card summary{color:#ff6666!important;}
+body.night-mode .res-detail{background:#220000!important;color:#ff9999!important;border-color:#4a1111!important;}
+</style>
+</head>
+<body>
+
+<div class="phone-wrapper">
+<div class="content-container">
+
+<div id="tab-home" class="page active">
+  <div class="card cover-card">
+    <p class="cover-eyebrow">WELCOME TO HACHIJOJIMA</p>
+    <h1>
+      <span class="editable" data-edit="name1">Mitsuki</span> & <span class="editable" data-edit="name2">Aruto</span>'s<br>Hachijojima Trip 2026
+    </h1>
+    <p class="cover-sub">6/22(月)夜発 〜 6/25(木)</p>
+    <div id="countdown-area">
+      <p id="cd-title" style="font-size:12px;color:#f3d9cb;font-weight:bold;margin-top:14px;">🚢 出航まで</p>
+      <div class="countdown">
+        <div class="cd-box"><div class="cd-num" id="cd-d">--</div><div class="cd-label">DAYS</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-h">--</div><div class="cd-label">HOURS</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-m">--</div><div class="cd-label">MIN</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-s">--</div><div class="cd-label">SEC</div></div>
+      </div>
+    </div>
+    <p class="edit-hint">✏️ 名前部分はタップで編集できます(自動保存)</p>
+  </div>
+
+  <div class="weather-banner" id="weather-banner">
+    <div class="wb-title">🌤️ 八丈島の天気(自動取得)</div>
+    <div id="weather-content" style="color:#718096; margin-bottom: 8px;">天気情報を取得中...</div>
+    <a href="https://tenki.jp/forecast/3/16/4430/13401/1hour.html" target="_blank" class="route-btn" style="margin:0;width:100%;font-size:12px;padding:6px 12px;background-color:#ffffff;">⏱️ tenki.jpで1時間ごとの詳細予報を見る</a>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:15px;margin-bottom:8px;">🚢 橘丸 運航状況チェック</h3>
+    <p style="font-size:12px;color:#718096;margin-bottom:10px;">出発前日の夜と当日朝に必ず確認!八丈島航路は海況による欠航が現実的にあります。</p>
+    <a href="https://www.tokaikisen.co.jp/" target="_blank" class="route-btn" style="margin:0;width:100%;">⚓ 東海汽船 運航状況を確認</a>
+    <div class="care-note" style="margin-top:10px;">
+      <b>⚠️ 欠航時のプランB:</b><br>
+      ① ANA便への振替を検討(羽田⇄八丈島 1日3往復)<br>
+      ② 当日朝便:ANA1891 羽田7:30発など ※要空席確認<br>
+      ③ それも無理なら竹芝で払い戻し→日程リスケ
+    </div>
+  </div>
+
+  <h3 style="margin:20px 0 10px 5px;">🎵 旅のドライブBGM</h3>
+  <div class="card" style="text-align:center;">
+    <p style="font-size:13px;margin-bottom:10px;color:#718096;">移動中の車内やサイクリングを彩る2人のお気に入りプレイリストへ!</p>
+    <a href="https://open.spotify.com/playlist/6DRha6cRQjSGp5dNL44gRK?si=b399b2ec8c4b45af&pt=a593338b324c0b7d4b6b0a168e15be21 " target="_blank" class="route-btn" id="playlist-link" style="margin:0 auto;width:85%;">🟢 プレイリストを開く</a>
+    <button onclick="setPlaylist()" style="font-size:11px;color:#718096;background:none;border:none;text-decoration:underline;cursor:pointer;margin-top:8px;">🔧 プレイリストURLを設定する</button>
+  </div>
+
+  <h3 style="margin:20px 0 10px 5px;">✨ やりたいことリスト <span id="wish-count" style="font-size:13px;color:var(--accent-peach);">0/7</span></h3>
+  <div class="card" style="padding-top:5px;">
+    <div class="check-item" data-id="w1"><input type="checkbox"> 満点の星空を見る</div>
+    <div class="check-item" data-id="w2"><input type="checkbox"> 一緒にハイキングをする</div>
+    <div class="check-item" data-id="w3"><input type="checkbox"> シュノーケリングでうみがめを見る</div>
+    <div class="check-item" data-id="w4"><input type="checkbox"> 島寿司を食べる</div>
+    <div class="check-item" data-id="w5"><input type="checkbox"> 島焼酎を飲む</div>
+    <div class="check-item" data-id="w6"><input type="checkbox"> サイクリングをする</div>
+    <div class="check-item" data-id="w7"><input type="checkbox"> ドライブをする</div>
+  </div>
+</div>
+
+<div id="tab-prepare" class="page">
+  <h2 class="accent-title">🧳 持ち物チェックリスト</h2>
+  <p class="accent-sub">PACKING LIST</p>
+
+  <div class="res-card" style="border-left-color: #1e3a5f;">
+    <details open>
+      <summary>🚢 東海汽船（橘丸） 予約控え（確認用）</summary>
+      <div class="res-detail">
+        <b>予約番号:</b> 1087807<br>
+        <b>乗船客船:</b> 大型客船「橘丸」<br>
+        <b>【往路】東京（竹芝） ➔ 八丈島（底土港）</b><br>
+        ・6/22(月) 22:30 発 ➔ 6/23(火) 08:55 着 (前夜発)<br>
+        <b>【復路】八丈島（底土港） ➔ 東京（竹芝）</b><br>
+        ・6/25(木) 09:40 発 ➔ 19:40 着<br>
+        <hr style="margin:6px 0; border:none; border-top:1px dashed #cbd5e1;">
+        <span style="color:#1e3a5f; font-weight:bold;">⚠️ 乗船の重要ポイント:</span><br>
+        ・当日は<b>出発30分前（22:00）</b>までに竹芝桟橋へ集合！窓口や自動券売機でeチケットか予約画面を見せて手続きしてね。<br>
+        ・海の状況により、八丈島の到着・出発港が底土港から「神湊港」へ急遽変わる場合があるから、当日朝の運行状況は要チェック！
+      </div>
+    </details>
+  </div>
+
+  <div class="res-card">
+    <details open>
+      <summary>🏨 八丈ビューホテル 予約控え（確認用）</summary>
+      <div class="res-detail">
+        <b>予約番号:</b> 0YMHK38C<br>
+        <b>宿泊代表者:</b> 神谷 歩人 様 (Aruto)<br>
+        <b>チェックイン:</b> 2026年6月23日(火) 17:00<br>
+        <b>チェックアウト:</b> 2026年6月25日(木) ～10:00<br>
+        <b>部屋タイプ:</b> 本館「碧」Superior洋室Twin（山側）<br>
+        <b>プラン:</b> 【朝食付】八丈島の味覚を選べる朝ごはん付きプラン<br>
+        <b>支払料金:</b> 31,480円 (税込・現地決済・クーポン利用後)<br>
+        <hr style="margin:6px 0; border:none; border-top:1px dashed #cbd5e1;">
+        <span style="color:#c25b3f; font-weight:bold;">⚠️ 当日役立つ重要ポイント:</span><br>
+        ・<b>夕食提供なし:</b> 2日目夜は大吉丸を予約済み！<br>
+        ・<b>飲食店無料お送りサービス有り:</b> 大賀郷地区の店までお送り可能（17:30/18:00/18:30発）。<span style="color:#e53e3e; font-weight:bold;">前日夕方までに要電話予約！</span>（帰りはタクシー）<br>
+        ・<b>EVカーシェア『eemo』完備:</b> ホテル敷地内に日産サクラあり。15分220円〜、アプリで24時間いつでもレンタル可能！
+      </div>
+    </details>
+  </div>
+
+  <div class="card" style="padding:12px 16px;">
+    <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:bold;color:var(--primary-green);">
+      <span>準備完了率</span><span><span id="prep-pct">0</span>%</span>
+    </div>
+    <div class="bar"><div class="bar-fill" id="prep-fill"></div></div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:15px;margin-bottom:10px;color:var(--accent-peach);">💳 1. 貴重品・基本アイテム</h3>
+    <div class="check-item" data-id="p1"><input type="checkbox"> スマートフォン & 充電器</div>
+    <div class="check-item" data-id="p2"><input type="checkbox"> モバイルバッテリー(マップ・写真撮影が多いので必須)</div>
+    <div class="check-item" data-id="p3"><input type="checkbox"> お財布(現金多め・身分証・保険証)※島内は現金のみの店あり</div>
+    <div class="check-item" data-id="p4"><input type="checkbox"> 「しまぽ通貨」の画面 & クーポン等の控え</div>
+    <div class="check-item" data-id="p5"><input type="checkbox"> 予約確認メールの控え(船・レンタカー・ホテル)</div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:15px;margin-bottom:10px;color:var(--accent-peach);">👕 2. 衣類・着替え</h3>
+    <div class="check-item" data-id="p6"><input type="checkbox"> 3日分の着替え & 下着(多めに)</div>
+    <div class="check-item" data-id="p7"><input type="checkbox"> パジャマ・部屋着</div>
+    <div class="check-item" data-id="p8"><input type="checkbox"> スニーカー【超重要】八丈富士1,280段+溶岩歩き対応。彼女にも必ず伝える!</div>
+    <div class="check-item" data-id="p9"><input type="checkbox"> 薄手の羽織るもの(夜行船デッキ・星空観賞の夜風対策)</div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:15px;margin-bottom:10px;color:var(--accent-peach);">🤿 3. 海・シュノーケリング用(Day 2)</h3>
+    <div class="check-item" data-id="p10"><input type="checkbox"> 水着 & ラッシュガード(日焼け・クラゲ対策)</div>
+    <div class="check-item" data-id="p11"><input type="checkbox"> バスタオル & フェイスタオル</div>
+    <div class="check-item" data-id="p12"><input type="checkbox"> サンダル / マリンシューズ</div>
+    <div class="check-item" data-id="p13"><input type="checkbox"> 防水スマホケース(ウミガメとのツーショット用)</div>
+    <div class="check-item" data-id="p14"><input type="checkbox"> ビニール袋数枚(濡れた水着・タオル用)</div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:15px;margin-bottom:10px;color:var(--accent-peach);">🧴 4. スキンケア・アメニティ</h3>
+    <div class="check-item" data-id="p15"><input type="checkbox"> 日焼け止め(島の紫外線は強烈)</div>
+    <div class="check-item" data-id="p16"><input type="checkbox"> スキンケアセット & メイク道具</div>
+    <div class="check-item" data-id="p17"><input type="checkbox"> シャンプー・リンス等(お気に入りがあれば)</div>
+    <div class="check-item" data-id="p18"><input type="checkbox"> 常備薬 & 酔い止め💊【超重要】Day1朝に船内で飲む用</div>
+    <div class="check-item" data-id="p19"><input type="checkbox"> 虫除けスプレー & かゆみ止め</div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:15px;margin-bottom:10px;color:var(--accent-peach);">🌂 5. その他・あると便利</h3>
+    <div class="check-item" data-id="p20"><input type="checkbox"> 折りたたみ傘 / レインコート</div>
+    <div class="check-item" data-id="p21"><input type="checkbox"> エコバッグ / 小さなサブバッグ</div>
+  </div>
+
+  <div class="card" style="background-color:#fffaf0;">
+    <h3 style="font-size:14px;color:var(--accent-peach);">💰 しまぽ残高カウンター(2人分)</h3>
+    <p style="font-size:13px;margin-top:5px;line-height:1.5;">
+      総予算: 26,000円(クーポン1.2万+しまぽ残額1.4万)<br>
+      ※梁山泊・銀八・大吉丸・レンタカーはすべて予算内!レジ前でバタバタしないよう俺がスマートに決済します!
+    </p>
+    <div style="margin-top:12px;font-size:13px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+      <input type="text" id="expense-name" placeholder="使い道" style="width:90px;padding:6px;border:1px solid #cbd5e1;border-radius:8px;">
+      <input type="number" id="expense-input" placeholder="金額" style="width:80px;padding:6px;border:1px solid #cbd5e1;border-radius:8px;">
+      <button onclick="addExpense()" style="padding:6px 12px;background-color:var(--primary-green);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:bold;">記録</button>
+    </div>
+    <p style="font-size:16px;font-weight:bold;margin-top:12px;color:var(--primary-green);">
+      残り予算: <span id="remaining-budget">26,000</span>円
+    </p>
+    <div class="bar"><div class="bar-fill" id="budget-fill"></div></div>
+    <div class="expense-log" id="expense-log"></div>
+    <button onclick="resetBudget()" style="font-size:11px;color:#718096;background:none;border:none;text-decoration:underline;cursor:pointer;margin-top:8px;padding:0;">全履歴リセット</button>
+  </div>
+</div>
+
+<div id="tab-sunny" class="page">
+  <h2 class="accent-title">☀️ 晴れプラン旅程</h2>
+  <p class="accent-sub">SUNNY PLAN</p>
+
+  <div class="card">
+    <h3 style="font-size:14px;margin-bottom:10px;">📅 6/22(月) 前夜発</h3>
+    <div class="timeline-item" data-dt="2026-06-22T22:30" style="border:none;padding-bottom:0;margin-bottom:0;">
+      <span class="time">22:30</span><br>
+      <span class="spot-name" onclick="openMap('竹芝桟橋')">🚢 竹芝桟橋</span>から夜行客船(橘丸)で出発!
+      <div class="spot-img g-ship">🚢</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:14px;margin-bottom:10px;">📅 6/23(火) Day 1</h3>
+
+    <div class="timeline-item" data-dt="2026-06-23T08:00">
+      <span class="time">08:00</span><br>
+      🚢 船内で酔い止めを飲む💊
+      <div class="care-note">八丈島周辺は黒潮の影響で波が高くなることもあるため先回りのケア!</div>
+    </div>
+
+    <div class="timeline-item" data-dt="2026-06-23T08:55">
+      <span class="time">08:55</span><br>
+      <span class="spot-name" onclick="openMap('底土港')">📍 底土港(または神湊港)</span>に到着<br>
+      <span style="font-size:13px;color:#4a5568;">レンタカー会社の送迎で営業所へ移動し手続き</span>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('底土港 八丈島','八丈富士 ふれあい牧場')">🚗 ルート案内(底土港 ➔ 八丈富士)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T10:00">
+      <span class="time">10:00</span><br>
+      <span class="spot-name" onclick="openMap('八丈富士 ふれあい牧場')">📍 八丈富士(マスト①・②)</span><br>
+      7合目のふれあい牧場まで爽快ドライブ&山頂ハイク(階段1,280段を約1時間)
+      <div class="spot-img g-mountain">⛰️</div>
+      <div class="care-note">ハイク後は汗をかくので、車内で楽なTシャツ等に着替えるのが快適!</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('八丈富士 ふれあい牧場','藍ヶ江水産 地魚干物食堂')">🚗 ルート案内(八丈富士 ➔ 藍ヶ江水産)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T13:00">
+      <span class="time">13:00</span><br>
+      <span class="spot-name" onclick="openMap('藍ヶ江水産 地魚干物食堂')">📍 藍ヶ江水産 地魚干物食堂</span><br>
+      名物の特製「島寿司」や「熟成生くさや定食」を2人でシェア!
+      <div class="spot-img g-food">🍣</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('藍ヶ江水産 地魚干物食堂','八丈ビューホテル')">🚗 ルート案内(藍ヶ江水産 ➔ ホテル)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T15:00">
+      <span class="time">15:00</span><br>
+      <span class="spot-name" onclick="openMap('八丈ビューホテル')">🏨 八丈ビューホテルチェックイン</span><br>
+      一度高台のホテルにお部屋入り。荷物を置いてまったり夕方の身支度。
+    </div>
+
+    <button class="route-btn" onclick="openRoute('八丈ビューホテル','南原千畳敷')">🚗 ルート案内(ホテル ➔ 南原千畳敷)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T16:30">
+      <span class="time">16:30</span><br>
+      <span class="spot-name" onclick="openMap('南原千畳敷')">📍 南原千畳敷ドライブ</span><br>
+      漆黒の溶岩台地。眼前の八丈小島にゆっくり沈む壮大な夕日を眺めるロマンチックタイム🌅
+      <div class="spot-img g-sunset">🌅</div>
+      <div class="care-note" id="sunset-note">この日の日没時刻: 取得中...</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('南原千畳敷','梁山泊 八丈島')">🚗 ルート案内(南原千畳敷 ➔ 梁山泊)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T18:30">
+      <span class="time">18:30</span><br>
+      <span class="spot-name" onclick="openMap('梁山泊 八丈島')">📍 八丈島郷土料理 梁山泊</span><br>
+      ★予約済み(名物の最高峰・島寿司確保!)「明日葉の天ぷら」や贅沢な地魚を心ゆくまで堪能。
+    </div>
+
+    <button class="route-btn" onclick="openRoute('梁山泊 八丈島','八丈ビューホテル')">🚗 ルート案内(梁山泊 ➔ ホテル)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T21:00" style="border:none;padding-bottom:0;margin-bottom:0;">
+      <span class="time">21:00</span><br>
+      🏨 ホテル着(お疲れ様でした!)
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:14px;margin-bottom:10px;">📅 6/24(水) Day 2</h3>
+
+    <div class="timeline-item" data-dt="2026-06-24T09:00">
+      <span class="time">09:00</span><br>
+      🏨 ホテル発(レンタカーでアクティブに出発!)
+    </div>
+
+    <button class="route-btn" onclick="openRoute('八丈ビューホテル','底土海水浴場')">🚗 ルート案内(ホテル ➔ 底土海水浴場)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T09:30">
+      <span class="time">09:30</span><br>
+      <span class="spot-name" onclick="openMap('底土海水浴場')">📍 底土海水浴場(マスト③)</span><br>
+      ウミガメ遭遇率NO.1のサンゴの海。足のつくタイドプール(潮溜まり)もあるので安心🤿
+      <div class="spot-img g-ocean">🐢</div>
+      <div class="care-note">🌊 タイドプールは<b>干潮の前後</b>が狙い目!<br>
+        <a href="https://www.google.com/search?q=%E5%85%AB%E4%B8%88%E5%B3%B6+%E6%BD%AE%E6%B1%90+6%E6%9C%8824%E6%97%A5" target="_blank" style="color:var(--primary-green);font-weight:bold;">→ 当日の潮汐表をGoogleで確認する</a>
+      </div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('底土海水浴場','すし処 銀八 八丈島')">🚗 ルート案内(底土海水浴場 ➔ 銀八)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T12:30">
+      <span class="time">12:30</span><br>
+      <span class="spot-name" onclick="openMap('すし処 銀八 八丈島')">📍 すし処 銀八</span><br>
+      ★予約済み!島寿司と江戸前が半々の贅沢セット。
+    </div>
+
+    <button class="route-btn" onclick="openRoute('すし処 銀八 八丈島','八丈ビューホテル')">🚗 ルート案内(銀八 ➔ レンタカー返却・ホテル)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T15:00">
+      <span class="time">15:00</span><br>
+      🚗 レンタカー返却 & 🚲 サイクリング移行(マスト④)<br>
+      <span style="font-size:13px;color:#4a5568;">ホテルで『八丈島サイクルシェア』をレンタル。</span>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('八丈ビューホテル','大里の玉石垣','bicycling')">🚲 ルート案内(自転車:ホテル ➔ 大里の玉石垣)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T16:00">
+      <span class="time">16:00</span><br>
+      <span class="spot-name" onclick="openMap('大里の玉石垣')">📍 大里の玉石垣</span><br>
+      レトロ情緒ある風情をめぐるのんびりサイクリングデート。
+      <div class="spot-img g-bike">🚲</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('大里の玉石垣','八丈ビューホテル')">🚲 ルート案内(大里の玉石垣 ➔ ホテル)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T17:30">
+      <span class="time">17:30</span><br>
+      🏨 ホテル着。自転車を返却し、お色直しをして夜のディナーデートへ!
+    </div>
+
+    <button class="route-btn" onclick="openRoute('八丈ビューホテル','居酒屋 大吉丸 八丈島')">🚗 ルート案内(ホテル ➔ 居酒屋 大吉丸)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T18:30">
+      <span class="time">18:30</span><br>
+      <span class="spot-name" onclick="openMap('居酒屋 大吉丸 八丈島')">📍 居酒屋 大吉丸</span><br>
+      ★予約必須!現役漁師の店主がその日に獲ってきた超新鮮な地魚や、豪快な漁師飯を心ゆくまで堪能!
+      <div class="spot-img g-izakaya">🏮</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('居酒屋 大吉丸 八丈島','八丈ビューホテル')">🚗 ルート案内(居酒屋 大吉丸 ➔ ホテル)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T21:00" style="border:none;padding-bottom:0;margin-bottom:0;">
+      <span class="time">21:00</span><br>
+      🏨 ホテル着(夜は2人で涼みながら、こぼれそうな満天の星空観賞🌟)
+      <div class="spot-img g-stars">🌌</div>
+      <div class="care-note" id="moon-note">この夜の月齢: 計算中...</div>
+      <button class="route-btn" onclick="toggleNightMode()" style="margin:10px 0 0 0;width:100%;background-color:#1a1a1a;color:#ff3333;border-color:#ff3333;">✨ 星空ナイトモードを起動/解除</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:14px;margin-bottom:10px;">📅 6/25(木) Day 3</h3>
+    <div class="timeline-item" data-dt="2026-06-25T07:30">
+      <span class="time">07:30</span><br>
+      🏨 ホテル発 🚲 朝の一番澄み切った空気を感じながらショートお散歩。
+    </div>
+    <div class="timeline-item" data-dt="2026-06-25T08:30">
+      <span class="time">08:30</span><br>
+      🏨 ホテル着(極上の島朝食を食べ終えたら、仲良くパッキング)
+    </div>
+    <button class="route-btn" onclick="openRoute('八丈ビューホテル','底土港')">🚌 ルート案内(送迎バス:ホテル ➔ 底土港)</button>
+    <div class="timeline-item" data-dt="2026-06-25T09:40" style="border:none;padding-bottom:0;margin-bottom:0;">
+      <span class="time">09:40</span><br>
+      🚢 底土港より橘丸にて出港。東京（竹芝）19:40着予定。最高の旅の締めくくり!
+      <div class="care-note" style="font-weight:bold;">🎫 復路船旅メモ: 東海汽船 橘丸 / 09:40発</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:14px;">📝 旅の思い出メモ(自動保存)</h3>
+    <p style="font-size:12px;color:#718096;margin-top:4px;">食べたもの、彼女の一言、ベスト瞬間…なんでも記録。旅行後に2人で見返そう!</p>
+    <textarea class="memo-area" data-id="memo-d1" placeholder="Day 1の思い出..."></textarea>
+    <textarea class="memo-area" data-id="memo-d2" placeholder="Day 2の思い出..."></textarea>
+    <textarea class="memo-area" data-id="memo-d3" placeholder="Day 3の思い出..."></textarea>
+    <div class="save-hint">✓ 入力すると自動で保存されます</div>
+  </div>
+</div>
+
+<div id="tab-rainy" class="page">
+  <h2 class="accent-title">☔ 雨天時プランB</h2>
+  <p class="accent-sub">RAINY PLAN</p>
+
+  <div class="card">
+    <h3 style="font-size:14px;margin-bottom:10px;">📅 6/22(月) 前夜発</h3>
+    <div class="timeline-item" data-dt="2026-06-22T22:30" style="border:none;padding-bottom:0;margin-bottom:0;">
+      <span class="time">22:30</span><br>
+      <span class="spot-name" onclick="openMap('竹芝桟橋')">🚢 竹芝桟橋</span>から夜行客船(橘丸)で出発!
+      <div class="spot-img g-ship">🚢</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:14px;margin-bottom:10px;">📅 6/23(火) Day 1</h3>
+
+    <div class="timeline-item" data-dt="2026-06-23T08:00">
+      <span class="time">08:00</span><br>
+      🚢 船内で酔い止めを飲む💊
+      <div class="care-note">雨の日は波が高くなりやすいため、いつも以上に先回りのケアが大切!</div>
+    </div>
+
+    <div class="timeline-item" data-dt="2026-06-23T08:55">
+      <span class="time">08:55</span><br>
+      <span class="spot-name" onclick="openMap('底土港')">📍 底土港(または神湊港)</span>に到着<br>
+      <span style="font-size:13px;color:#4a5568;">レンタカー会社の送迎で営業所へ移動し手続き</span>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('底土港 八丈島','八丈島地熱館')">🚗 ルート案内(底土港 ➔ 八丈島地熱館)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T10:00">
+      <span class="time">10:00</span><br>
+      <span class="spot-name" onclick="openMap('八丈島地熱館')">📍 八丈島地熱館</span><br>
+      地球のエネルギーを体感。雨音を聴きながらのんびり楽しむインドアサイエンスデート。
+      <div class="spot-img g-geo">🌋</div>
+      <div class="care-note">館内は空調が効いていてとても快適。じっくり見ると1時間半ほど楽しめます。</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('八丈島地熱館','藍ヶ江水産 地魚干物食堂')">🚗 ルート案内(八丈島地熱館 ➔ 藍ヶ江水産)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T13:00">
+      <span class="time">13:00</span><br>
+      <span class="spot-name" onclick="openMap('藍ヶ江水産 地魚干物食堂')">📍 藍ヶ江水産 地魚干物食堂</span><br>
+      名物の特製「島寿司」を2人でシェア!雨の日の美味しいランチで元気チャージ。
+      <div class="spot-img g-food">🍣</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('藍ヶ江水産 地魚干物食堂','八丈ビューホテル')">🚗 ルート案内(藍ヶ江水産 ➔ ホテル)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T15:00">
+      <span class="time">15:00</span><br>
+      <span class="spot-name" onclick="openMap('八丈ビューホテル')">🏨 八丈ビューホテルチェックイン</span><br>
+      一度高台のホテルにお部屋入り。荷物を置いてまったり夕方の身支度。
+    </div>
+
+    <button class="route-btn" onclick="openRoute('八丈ビューホテル','えこ・あぐりまーる')">🚗 ルート案内(ホテル ➔ えこ あぐりまーる)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T16:30">
+      <span class="time">16:30</span><br>
+      <span class="spot-name" onclick="openMap('えこ・あぐりまーる')">📍 えこ・あぐりまーる</span><br>
+      熱帯植物園の温室をのんびり散策。全面ガラス張りなので雨でも全く濡れずに南国ジャングル気分を大満喫🌴
+      <div class="spot-img g-green">🌴</div>
+      <div class="care-note">雨の滴るガラス張りの温室は、最高の逆光映え写真スポット📸</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('えこ・あぐりまーる','梁山泊 八丈島')">🚗 ルート案内(えこ あぐりまーる ➔ 梁山泊)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T18:30">
+      <span class="time">18:30</span><br>
+      <span class="spot-name" onclick="openMap('梁山泊 八丈島')">📍 八丈島郷土料理 梁山泊</span><br>
+      ★予約済み(名物の最高峰・島寿司確保!)「明日葉の天ぷら」や贅沢な地魚を堪能. 雨の夜は島の焼酎がより美味しく感じられます。
+    </div>
+
+    <button class="route-btn" onclick="openRoute('梁山泊 八丈島','八丈ビューホテル')">🚗 ルート案内(梁山泊 ➔ ホテル)</button>
+
+    <div class="timeline-item" data-dt="2026-06-23T21:00" style="border:none;padding-bottom:0;margin-bottom:0;">
+      <span class="time">21:00</span><br>
+      🏨 ホテル着(お疲れ様でした!)
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:14px;margin-bottom:10px;">📅 6/24(水) Day 2</h3>
+
+    <div class="timeline-item" data-dt="2026-06-24T09:00">
+      <span class="time">09:00</span><br>
+      🏨 ホテル発(レンタカーで快適インドア出発!)
+    </div>
+
+    <button class="route-btn" onclick="openRoute('八丈ビューホテル','みはらしの湯 八丈島')">🚗 ルート案内(ホテル ➔ みはらしの湯)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T09:30">
+      <span class="time">09:30</span><br>
+      <span class="spot-name" onclick="openMap('みはらしの湯 八丈島')">♨️ みはらしの湯(町営温泉)</span><br>
+      雨に煙る太平洋を眺めながら絶景露天風呂。檜の香りと温泉で極上のリラックスタイム。
+      <div class="spot-img g-onsen">♨️</div>
+      <div class="care-note">雨の露天風呂も風情があって最高ですが、湯冷めしないようバスタオルは多めに持参!</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('みはらしの湯 八丈島','すし処 銀八 八丈島')">🚗 ルート案内(みはらしの湯 ➔ 銀八)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T12:30">
+      <span class="time">12:30</span><br>
+      <span class="spot-name" onclick="openMap('すし処 銀八 八丈島')">📍 すし処 銀八</span><br>
+      ★予約済み!島寿司と江戸前握りを食べて贅沢に過ごそう。
+    </div>
+
+    <button class="route-btn" onclick="openRoute('すし処 銀八 八丈島','八丈ビューホテル')">🚗 ルート案内(銀八 ➔ レンタカー返却・ホテル)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T15:00">
+      <span class="time">15:00</span><br>
+      🚗 レンタカー返却 & ホテルおこもり移行<br>
+      <span style="font-size:13px;color:#4a5568;">雨のためサイクリングは中止し、ホテルへ。お部屋でのんびり2人の時間を楽しむ贅沢。</span>
+      <div class="care-note">売店で島の地酒(麦冠や情け嶋)を買って、お部屋で2人だけの島酒飲み比べ会がおすすめ!</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('八丈ビューホテル','居酒屋 大吉丸 八丈島')">🚗 ルート案内(ホテル ➔ 居酒屋 大吉丸)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T18:30">
+      <span class="time">18:30</span><br>
+      <span class="spot-name" onclick="openMap('居酒屋 大吉丸 八丈島')">📍 居酒屋 大吉丸</span><br>
+      ★予約必須!外は雨でも、最高に美味しい島酒と漁師厳選の絶品海の幸があれば一気に特別な宴会に。
+      <div class="spot-img g-izakaya">🏮</div>
+    </div>
+
+    <button class="route-btn" onclick="openRoute('居酒屋 大吉丸 八丈島','八丈ビューホテル')">🚗 ルート案内(居酒屋 大吉丸 ➔ ホテル)</button>
+
+    <div class="timeline-item" data-dt="2026-06-24T21:00" style="border:none;padding-bottom:0;margin-bottom:0;">
+      <span class="time">21:00</span><br>
+      🏨 ホテル着(夜は雨音を心地いいBGMに、お部屋でお酒を飲みながらまったりトーク🥂)
+      <button class="route-btn" onclick="toggleNightMode()" style="margin:10px 0 0 0;width:100%;background-color:#1a1a1a;color:#ff3333;border-color:#ff3333;">✨ 星空ナイトモードを起動/解除</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:14px;margin-bottom:10px;">📅 6/25(木) Day 3</h3>
+    <div class="timeline-item" data-dt="2026-06-25T07:30">
+      <span class="time">07:30</span><br>
+      🏨 🛌 お部屋でのんびり朝のストレッチ。
+    </div>
+    <div class="timeline-item" data-dt="2026-06-25T08:30">
+      <span class="time">08:30</span><br>
+      🏨 極上の島朝食を食べ終えたら、仲良くパッキング
+    </div>
+    <button class="route-btn" onclick="openRoute('八丈ビューホテル','底土港')">🚌 ルート案内(送迎バス:ホテル ➔ 底土港)</button>
+    <div class="timeline-item" data-dt="2026-06-25T09:40" style="border:none;padding-bottom:0;margin-bottom:0;">
+      <span class="time">09:40</span><br>
+      🚢 底土港より橘丸にて出港。東京19:40着予定。最高の旅の締めくくり!
+    </div>
+  </div>
+</div>
+
+<div id="tab-links" class="page">
+  <h2 class="accent-title">🔗 デジタルリンク集</h2>
+  <p class="accent-sub">QUICK LINKS</p>
+
+  <div class="res-card" style="border-left-color: #1e3a5f;">
+    <details>
+      <summary>🚢 【詳細確認】東海汽船（橘丸） 予約確認控え</summary>
+      <div class="res-detail">
+        <b>予約番号:</b> 1087807<br>
+        <b>船名:</b> 大型客船「橘丸」<br>
+        <b>往路:</b> 6/22(月) 22:30 竹芝発 ➔ 6/23(火) 08:55 八丈島(底土)着<br>
+        <b>復路:</b> 6/25(木) 09:40 八丈島(底土)発 ➔ 19:40 竹芝着<br>
+        <hr style="margin:6px 0; border:none; border-top:1px dashed #cbd5e1;">
+        ・各港ターミナルへは出発時刻の30分前（往路22:00 / 復路09:10）までに要集合。
+      </div>
+    </details>
+  </div>
+
+  <div class="res-card">
+    <details>
+      <summary>🏨 【詳細確認】八丈ビューホテル 予約確認控え</summary>
+      <div class="res-detail">
+        <b>予約番号:</b> 0YMHK38C<br>
+        <b>宿泊代表者:</b> 神谷 歩人 様<br>
+        <b>チェックイン:</b> 6/23(火) 17:00 / <b>アウト:</b> 6/25(木) 10:00<br>
+        <b>部屋:</b> 本館「碧」Superior洋室Twin（山側）<br>
+        <b>プラン:</b> 【朝食付】八丈島の味覚を選べる朝ごはん付きプラン<br>
+        <b>支払方法:</b> 現地決済 / <b>合計額:</b> 31,480円 (クーポン適用後)<br>
+        <hr style="margin:6px 0; border:none; border-top:1px dashed #cbd5e1;">
+        ・<b>無料送迎特典:</b> 大賀郷地区の店まで往路送り対応（17:30/18:00/18:30発）。<span style="color:#e53e3e; font-weight:bold;">前日夕方までに要電話予約！</span><br>
+        ・<b>敷地内EVシェア『eemo』:</b> アプリ完結型（15分220円〜）
+      </div>
+    </details>
+  </div>
+
+  <div class="link-category">🗺️ 全体マップ・自然条件</div>
+  <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=%E5%85%AB%E4%B8%88%E5%B3%B6" target="_blank">📍 Googleマップ(八丈島観光マップ)</a>
+  <a class="quick-link" href="https://www.google.com/search?q=%E5%85%AB%E4%B8%88%E5%B3%B6+%E6%BD%AE%E6%B1%90+6%E6%9C%8月24%E6%97%A5" target="_blank">🌊 当日の潮汐表（タイドプールウミガメ用）</a>
+  <a class="quick-link" href="https://tenki.jp/forecast/3/16/4430/13401/1hour.html" target="_blank">🌤️ tenki.jp（八丈島1時間ごとの詳細天気）</a>
+
+  <div class="link-category">🏨 宿泊・交通</div>
+  <a class="quick-link" href="https://www.hachijo-v.co.jp/" target="_blank">🏨 八丈ビューホテル 公式サイト</a>
+  <a class="quick-link" href="https://www.tokaikisen.co.jp/" target="_blank">🚢 東海汽船(橘丸 運航状況)</a>
+  <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=%E7%AB%B9%E8%8A%9D%E6%A1%9F%E6%A9%8B" target="_blank">⚓ 竹芝桟橋(マップ)</a>
+  <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=%E5%BA%95%E5%9C%9F%E6%B8%AF" target="_blank">⚓ 底土港(マップ)</a>
+
+  <div class="link-category">🍽️ グルメ</div>
+  <a class="quick-link" href="https://tabelog.com/tokyo/A1331/A133101/13171804/" target="_blank">🐟 藍ヶ江水産 地魚干物食堂 詳細</a>
+  <a class="quick-link" href="https://tabelog.com/tokyo/A1331/A133101/13044141/" target="_blank">🏮 八丈島郷土料理 梁山泊 詳細</a>
+  <a class="quick-link" href="https://tabelog.com/tokyo/A1331/A133101/13045610/" target="_blank">🍣 すし処 銀八 詳細</a>
+  <a class="quick-link" href="https://tabelog.com/tokyo/A1331/A133101/13143521/" target="_blank">⚓ 居酒屋 大吉丸 詳細ページ</a>
+
+  <div class="link-category">⛰️ 観光スポット(晴れプラン)</div>
+  <a class="quick-link" href="https://www.hachijo.gr.jp/" target="_blank">🌴 八丈島観光協会 公式HP</a>
+  <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=%E5%85%AB%E4%B8%88%E5%AF%8C%E5%A3%AB%E3%81%B5%E3%82%8C%E3%81%82%E3%81%84%E7%89%A7%E5%A0%B4" target="_blank">🐄 八丈富士 ふれあい牧場(マップ)</a>
+  <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=%E5%8D%97%E5%8E%9F%E5%8D%83%E7%95%B3%E6%95%B7" target="_blank">🌅 南原千畳敷(マップ)</a>
+  <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=%E5%BA%95%E5%9C%9F%E6%B5%B7%E6%B0%B4%E6%B5%B4%E5%A0%B4" target="_blank">🤿 底土海水浴場(マップ)</a>
+  <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%87%8C%E3%81%AE%E7%8E%89%E7%9F%B3%E5%9E%A3" target="_blank">🧱 大里の玉石垣(マップ)</a>
+
+  <div class="link-category">☔ 観光スポット(雨プラン)</div>
+  <a class="quick-link" href="http://www.town.hachijo.tokyo.jp/geothermal/" target="_blank">🌋 八丈島地熱館 公式HP</a>
+  <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=%E3%81%88%E3%81%93%E3%81%82%E3%81%90%E3%82%8A%E3%81%BE%E3%83%BC%E3%82%8B" target="_blank">🌿 えこ・あぐりまーる 情報</a>
+  <a class="quick-link" href="https://www.google.com/maps/search/?api=1&query=%E3%81%BF%E3%81%AF%E3%82%89%E3%81%97%E3%81%AE%E6%B9%AF+%E5%85%AB%E4%B8%88%E5%B3%B6" target="_blank">♨️ みはらしの湯(町営温泉マップ)</a>
+
+  <div class="photo-frame">
+    <div>ここに旅のベストショットを貼る 📸</div>
+    <div style="font-size:11px;margin-top:5px;">(旅行後にスクショしてはめ込んでね!)</div>
+  </div>
+</div>
+
+</div>
+
+<nav class="tab-bar">
+  <button class="tab-btn active" data-tab="tab-home"><span class="tab-icon">🏠</span>表紙</button>
+  <button class="tab-btn" data-tab="tab-prepare"><span class="tab-icon">🧳</span>準備</button>
+  <button class="tab-btn" data-tab="tab-sunny"><span class="tab-icon">☀️</span>晴れ</button>
+  <button class="tab-btn" data-tab="tab-rainy"><span class="tab-icon">☔</span>雨</button>
+  <button class="tab-btn" data-tab="tab-links"><span class="tab-icon">🔗</span>リンク</button>
+</nav>
+</div>
+
+<script>
+/* ========== 安全ストレージ ========== */
+const store = { ok: false, mem: {} };
+try { localStorage.setItem('__t','1'); localStorage.removeItem('__t'); store.ok = true; } catch(e) {}
+function sget(k, def) {
+  try { if (store.ok) { const v = localStorage.getItem('hachijo_' + k); return v === null ? def : JSON.parse(v); } } catch(e) {}
+  return (k in store.mem) ? store.mem[k] : def;
+}
+function sset(k, v) {
+  try { if (store.ok) { localStorage.setItem('hachijo_' + k, JSON.stringify(v)); return; } } catch(e) {}
+  store.mem[k] = v;
+}
+
+/* ========== タブ切り替え ========== */
+const tabs = document.querySelectorAll('.tab-btn');
+const pages = document.querySelectorAll('.page');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    pages.forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+    document.querySelector('.content-container').scrollTop = 0;
+  });
+});
+
+/* ========== マップ・ルート ========== */
+function openMap(spotName) {
+  window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(spotName), '_blank');
+}
+function openRoute(origin, dest, mode) {
+  mode = mode || 'driving';
+  window.open('https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin)
+    + '&destination=' + encodeURIComponent(dest) + '&travelmode=' + mode, '_blank');
+}
+
+/* ========== 編集可能フィールド ========== */
+function initEditables() {
+  document.querySelectorAll('.editable[data-edit]').forEach(el => {
+    const k = el.getAttribute('data-edit');
+    const saved = sget('edit_' + k, '');
+    if (saved) el.innerText = saved;
+    el.setAttribute('contenteditable', 'true');
+    el.setAttribute('spellcheck', 'false');
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); el.blur(); } });
+    el.addEventListener('blur', () => {
+      const val = el.innerText.trim() || '〇〇';
+      el.innerText = val;
+      sset('edit_' + k, val);
+      document.querySelectorAll('.editable[data-edit="' + k + '"]').forEach(other => {
+        if (other !== el) other.innerText = val;
+      });
+    });
+  });
+}
+
+/* ========== プレイリストURL設定 ========== */
+function applyPlaylist() {
+  const u = sget('playlist', '');
+  if (u) document.getElementById('playlist-link').href = u;
+}
+function setPlaylist() {
+  const u = prompt('プレイリストのURLを貼り付けてください(Spotify / Apple Music など)', sget('playlist', ''));
+  if (u && u.trim()) { sset('playlist', u.trim()); applyPlaylist(); alert('保存しました!🎵'); }
+}
+
+/* ========== チェックリスト ========== */
+function updateProgress() {
+  const prep = document.querySelectorAll('#tab-prepare .check-item');
+  const done = document.querySelectorAll('#tab-prepare .check-item.checked');
+  const pct = prep.length ? Math.round(done.length / prep.length * 100) : 0;
+  document.getElementById('prep-pct').innerText = pct;
+  document.getElementById('prep-fill').style.width = pct + '%';
+  const wish = document.querySelectorAll('#tab-home .check-item');
+  const wdone = document.querySelectorAll('#tab-home .check-item.checked');
+  document.getElementById('wish-count').innerText = wdone.length + '/' + wish.length;
+}
+function initChecklists() {
+  const saved = sget('checks', {});
+  document.querySelectorAll('.check-item[data-id]').forEach(el => {
+    const id = el.getAttribute('data-id');
+    const cb = el.querySelector('input[type="checkbox"]');
+    if (saved[id]) { el.classList.add('checked'); if (cb) cb.checked = true; }
+    el.addEventListener('click', (ev) => {
+      if (ev.target.tagName === 'INPUT') ev.preventDefault();
+      el.classList.toggle('checked');
+      const on = el.classList.contains('checked');
+      if (cb) cb.checked = on;
+      const s = sget('checks', {});
+      s[id] = on;
+      sset('checks', s);
+      updateProgress();
+    });
+  });
+  updateProgress();
+}
+
+/* ========== しまぽ残高+支出ログ ========== */
+const TOTAL_BUDGET = 26000;
+function renderExpenses() {
+  const log = sget('expenses', []);
+  const used = log.reduce((a, e) => a + e.amount, 0);
+  document.getElementById('remaining-budget').innerText = (TOTAL_BUDGET - used).toLocaleString();
+  const fill = document.getElementById('budget-fill');
+  const pct = Math.min(100, Math.round(used / TOTAL_BUDGET * 100));
+  fill.style.width = pct + '%';
+  fill.classList.toggle('warn', pct >= 80);
+  const wrap = document.getElementById('expense-log');
+  wrap.innerHTML = '';
+  log.forEach((e, i) => {
+    const row = document.createElement('div');
+    row.className = 'expense-row';
+    const name = document.createElement('span');
+    name.textContent = e.name || '支出';
+    const right = document.createElement('span');
+    right.innerHTML = '-' + e.amount.toLocaleString() + '円 ';
+    const del = document.createElement('button');
+    del.className = 'expense-del';
+    del.textContent = '✕';
+    del.onclick = () => delExpense(i);
+    right.appendChild(del);
+    row.appendChild(name);
+    row.appendChild(right);
+    wrap.appendChild(row);
+  });
+}
+function addExpense() {
+  const nameEl = document.getElementById('expense-name');
+  const valEl = document.getElementById('expense-input');
+  const value = parseInt(valEl.value);
+  if (!isNaN(value) && value > 0) {
+    const log = sget('expenses', []);
+    log.push({ name: nameEl.value.trim() || '支出', amount: value });
+    sset('expenses', log);
+    nameEl.value = ''; valEl.value = '';
+    renderExpenses();
+  }
+}
+function delExpense(i) {
+  const log = sget('expenses', []);
+  log.splice(i, 1);
+  sset('expenses', log);
+  renderExpenses();
+}
+function resetBudget() {
+  if (confirm('支出履歴をすべてリセットしますか?')) { sset('expenses', []); renderExpenses(); }
+}
+
+/* ========== ナイトモード ========== */
+function toggleNightMode() {
+  document.body.classList.toggle('night-mode');
+  sset('night', document.body.classList.contains('night-mode'));
+}
+if (sget('night', false)) document.body.classList.add('night-mode');
+
+/* ========== 思い出メモ ========== */
+function initMemos() {
+  document.querySelectorAll('.memo-area[data-id]').forEach(el => {
+    const id = el.getAttribute('data-id');
+    el.value = sget(id, '');
+    el.addEventListener('input', () => sset(id, el.value));
+  });
+}
+
+/* ========== 出発カウントダウン ========== */
+const DEPART = new Date('2026-06-22T22:30:00+09:00');
+const TRIP_END = new Date('2026-06-25T19:40:00+09:00');
+function updateCountdown() {
+  const now = new Date();
+  const title = document.getElementById('cd-title');
+  let diff = DEPART - now;
+  if (now >= DEPART && now <= TRIP_END) {
+    title.innerText = '🏝️ 旅行中!最高の時間を!';
+    ['cd-d','cd-h','cd-m','cd-s'].forEach(id => document.getElementById(id).innerText = '🎉');
+    return;
+  }
+  if (now > TRIP_END) {
+    title.innerText = '🏠 おかえりなさい!思い出メモを見返そう';
+    ['cd-d','cd-h','cd-m','cd-s'].forEach(id => document.getElementById(id).innerText = '✨');
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor(diff % 86400000 / 3600000);
+  const m = Math.floor(diff % 3600000 / 60000);
+  const s = Math.floor(diff % 60000 / 1000);
+  document.getElementById('cd-d').innerText = d;
+  document.getElementById('cd-h').innerText = h;
+  document.getElementById('cd-m').innerText = m;
+  document.getElementById('cd-s').innerText = s;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* ========== 「いまここ」ハイライト ========== */
+function updateNowHighlight() {
+  const now = new Date();
+  if (now < DEPART || now > TRIP_END) return;
+  const items = Array.from(document.querySelectorAll('.timeline-item[data-dt]'));
+  document.querySelectorAll('.now-badge').forEach(b => b.remove());
+  items.forEach(el => el.classList.remove('now-item'));
+  ['tab-sunny', 'tab-rainy'].forEach(pageId => {
+    const pageItems = items.filter(el => el.closest('#' + pageId));
+    let current = null;
+    pageItems.forEach(el => {
+      const dt = new Date(el.getAttribute('data-dt') + ':00+09:00');
+      if (dt <= now) current = el;
+    });
+    if (current) {
+      current.classList.add('now-item');
+      const t = current.querySelector('.time');
+      if (t) {
+        const badge = document.createElement('span');
+        badge.className = 'now-badge';
+        badge.innerText = 'NOW';
+        t.after(badge);
+      }
+    }
+  });
+}
+setInterval(updateNowHighlight, 60000);
+updateNowHighlight();
+
+/* ========== 月齢計算(6/24 星空観賞の夜) ========== */
+function moonInfo(date) {
+  const synodic = 29.53058867;
+  const ref = new Date(Date.UTC(2000, 0, 6, 18, 14));
+  const days = (date - ref) / 86400000;
+  const age = ((days % synodic) + synodic) % synodic;
+  const illum = Math.round((1 - Math.cos(2 * Math.PI * age / synodic)) / 2 * 100);
+  let phase, advice;
+  if (age < 1.8 || age > 27.7) { phase = '新月🌑'; advice = '月明かりほぼゼロ。天の川まで見える最高の星空コンディション!'; }
+  else if (age < 7.4) { phase = '三日月〜上弦🌒'; advice = '月は早めに沈むので、夜遅めの時間は星がよく見えます!'; }
+  else if (age < 9.2) { phase = '上弦の月🌓'; advice = '深夜0時頃に月が沈むので、それ以降が星空のゴールデンタイム!'; }
+  else if (age < 13.8) { phase = '十三夜前後🌔'; advice = '月がやや明るめ。月と星の両方を楽しむ夜に。月の沈む方角と逆の空を見るのがコツ!'; }
+  else if (age < 16.6) { phase = '満月🌕'; advice = '月夜の海も幻想的!明るい星と月光の海のコラボを楽しもう。'; }
+  else if (age < 22) { phase = '居待月〜下弦前🌖'; advice = '月の出が遅いので、21時頃はまだ星がよく見えるチャンス!'; }
+  else { phase = '下弦〜有明月🌗'; advice = '夜の前半は月明かりが少なく星空観賞に好条件!'; }
+  return { age: age.toFixed(1), illum, phase, advice };
+}
+(function() {
+  const night = new Date('2026-06-24T21:00:00+09:00');
+  const m = moonInfo(night);
+  const el = document.getElementById('moon-note');
+  if (el) el.innerHTML = '🌙 <b>6/24夜の月:' + m.phase + '</b>(月齢' + m.age + '・輝面率約' + m.illum + '%)<br>' + m.advice;
+})();
+
+/* ========== 天気自動取得 ========== */
+const WMO = {
+  0:['快晴','☀️'],1:['晴れ','🌤️'],2:['一部曇り','⛅'],3:['曇り','☁️'],
+  45:['霧','🌫️'],48:['霧氷','🌫️'],51:['霧雨','🌦️'],53:['霧雨','🌦️'],55:['強い霧雨','🌧️'],
+  61:['小雨','🌦️'],63:['雨','🌧️'],65:['大雨','🌧️'],80:['にわか雨','🌦️'],81:['にわか雨','🌧️'],82:['激しいにわか雨','⛈️'],
+  95:['雷雨','⛈️'],96:['雷雨・ひょう','⛈️'],99:['激しい雷雨','⛈️']
+};
+function wmoDesc(code) { return WMO[code] || ['不明','🌡️']; }
+async function loadWeather() {
+  const el = document.getElementById('weather-content');
+  try {
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=33.11&longitude=139.79'
+      + '&daily=weathercode,precipitation_probability_max,temperature_2m_max,temperature_2m_min,sunset'
+      + '&timezone=Asia%2FTokyo&start_date=2026-06-22&end_date=2026-06-25';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('fetch failed');
+    const data = await res.json();
+    const d = data.daily;
+    const labels = ['6/22(月)','6/23(火)','6/24(放)','6/25(木)'];
+    let html = '';
+    let day1Rain = null;
+    for (let i = 0; i < d.time.length; i++) {
+      const [desc, icon] = wmoDesc(d.weathercode[i]);
+      const pop = d.precipitation_probability_max ? d.precipitation_probability_max[i] : null;
+      html += '<div class="weather-day"><span>' + labels[i] + '</span><span>' + icon + ' ' + desc
+        + ' / ' + Math.round(d.temperature_2m_min[i]) + '〜' + Math.round(d.temperature_2m_max[i]) + '℃'
+        + (pop !== null ? ' / 降水' + pop + '%' : '') + '</span></div>';
+      if (i === 1) day1Rain = pop;
+    }
+    if (day1Rain !== null) {
+      if (day1Rain >= 50) {
+        html += '<div class="plan-suggest plan-rainy">☔ Day1は雨予報 → 「雨プランB」推奨!</div>';
+      } else {
+        html += '<div class="plan-suggest plan-sunny">☀️ Day1は晴れ寄り → 「晴れプラン」でGO!</div>';
+      }
+    }
+    el.innerHTML = html;
+    const sunsetEl = document.getElementById('sunset-note');
+    if (sunsetEl && d.sunset && d.sunset[1]) {
+      const t = d.sunset[1].split('T')[1];
+      sunsetEl.innerHTML = '🌅 <b>この日の日没: ' + t + '頃</b> → 16:30出発なら余裕を持って夕日に間に合います!ベストは日没30分前から。';
+    }
+  } catch(e) {
+    el.innerHTML = '📡 オフラインまたは取得エラーです。電波のある場所で再読み込みすると、旅行期間(6/22〜25)の予報とプラン推奨が表示されます。';
+  }
+}
+loadWeather();
+
+/* ========== 初期化 ========== */
+initEditables();
+applyPlaylist();
+initChecklists();
+initMemos();
+renderExpenses();
+</script>
+</body>
+</html>
